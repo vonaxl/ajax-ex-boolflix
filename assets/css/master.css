@@ -1,0 +1,28 @@
+.pads{
+  padding: 4rem 0;
+}
+body{
+  background: maroon;
+}
+#cerca{
+  width: 90% !important;
+  padding: 0.5rem 2rem;
+  border-radius: 20px;
+}
+.movie{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  float: left;
+  width: calc((100% / 4) - 4rem);
+  height: 400px;
+  background: white;
+}
+.title{
+  color: maroon;
+}
+.card{
+  margin: 1rem;
+}

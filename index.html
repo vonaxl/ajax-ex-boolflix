@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link rel="stylesheet" href="assets/css/master.css">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- search bar -->
+      <div class="row justify-content-center align-items-center pads">
+        <div class="col-6">
+          <input id="cerca" type="text">
+          <button id="invia" type="button" class="btn btn-light">Cerca</button>
+        </div>
+      </div>
+      <div id="films" class="row justify-content-center pads">
+      </div>
+    </div>
+    <!-- template -->
+    <script id="hb-template" type="text/x-handlebars-template">
+      <!-- <div class='{{classname}} '>
+          <img src ='https://image.tmdb.org/t/p/w500/{{img}}' alt=''>
+          <h3><span class="title">{{title}}</span></h3>
+          <ul class="list-unstyled">
+            <li>Titolo Originale : {{titleOrg}}</li>
+            <li>Lingua : {{lingua}}</li>
+            <li>Voto : {{voto}}</li>
+          </ul>
+          <span class="author">{{name}}</span>
+          <span class="year">{{anno}}</span>
+      </div> -->
+
+      <div class="card" style="width: 18rem;">
+          <img src="https://image.tmdb.org/t/p/w500/{{img}}" class="card-img-top" alt="image not found">
+          <div class="card-body  d-flex flex-column justify-content-end">
+            <h3><span class="title">{{title}}</span></h3>
+            <ul class="list-unstyled">
+              <li>Titolo Originale : {{titleOrg}}</li>
+              <li>Lingua : {{lingua}}</li>
+              <li>Voto : {{voto}}</li>
+            </ul>
+            <a href="#" class="btn btn-danger">Guarda</a>
+          </div>
+        </div>
+  </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/js/myscript.js" charset="utf-8"></script>
+  </body>
+</html>
