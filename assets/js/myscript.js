@@ -1,4 +1,4 @@
-function callAjax(titolo) {
+function callMovie(titolo) {
   $.ajax({
     url: "https://api.themoviedb.org/4/search/movie",
     method: "GET",
@@ -29,6 +29,22 @@ function callAjax(titolo) {
     error: function() {}
   }); //fine $.ajax
 }
+function callTv(titolo) {
+  $.ajax({
+    url: "https://api.themoviedb.org/4/search/tv",
+    method: "GET",
+    data: {
+      api_key: "0878a4f792be7a8e086e7aa5c1356f41",
+      language: "it-IT",
+      query: titolo
+    },
+    success: function(dati) {
+      var tv = dati.results;
+      printT(tv);
+    },
+    error: function() {}
+  }); //fine $.ajax
+}
 function inputReset(){
   $('#cerca').val('');
 }
@@ -36,7 +52,7 @@ function print(movies) {
   $("#cerca").html("");
   movies.forEach(z => {
     // console.log(z);
-    var sorgente = $("#hb-template").html();
+    var sorgente = $("#movies").html();
     var sorgDigerita = Handlebars.compile(sorgente);
     // save the vote to be used on a function
     var vote = z.vote_average;
@@ -52,6 +68,28 @@ function print(movies) {
     
     var elValorizzato = sorgDigerita(objRef);
     $("#films").append(elValorizzato);
+  });
+}
+function printT(tv) {
+  $("#cerca").html("");
+  tv.forEach(z => {
+    // console.log(z);
+    var sorgente = $("#tvs").html();
+    var sorgDigerita = Handlebars.compile(sorgente);
+    // save the vote to be used on a function
+    var vote = z.vote_average;
+    var flag = z.original_language;
+    var objRef = {
+      img: z.backdrop_path,
+      title: z.name,
+      titleOrg: z.original_name,
+      lingua: z.original_language,
+      nazione: nation(flag),
+      voto: z.vote_average+' '+stars(vote)
+    };
+    
+    var elValorizzato = sorgDigerita(objRef);
+    $("#tvSeries").append(elValorizzato);
   });
 }
 
@@ -77,7 +115,7 @@ function nation(flag){
     paese = 'cn.png';
   }else if (flag === "en") {
     paese = 'uk.png';
-  }else if (flag === "jp") {
+  }else if (flag === "ja") {
     paese = 'jp.png';
   }else if (flag === "fr") {
     paese = 'fr.png';
@@ -92,13 +130,16 @@ function nation(flag){
 $(document).ready(function() {
   // .toLowerCase().replace(/ /g,"+");
   $("#invia").click(function() {
+    // $('#films,#tvSeries').css('he')
     var titolo = $("#cerca")
       .val()
       .toLowerCase()
       .replace(/ /g, "+");
     $("#films").html("");
+    $("#tvSeries").html("");
     console.log(titolo);
-    callAjax(titolo);
+    callMovie(titolo);
+    callTv(titolo);
   });
 });
  
