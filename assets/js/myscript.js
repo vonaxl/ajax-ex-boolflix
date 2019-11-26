@@ -35,20 +35,32 @@ function inputReset(){
 function print(movies) {
   $("#cerca").html("");
   movies.forEach(z => {
-    console.log(z);
+    // console.log(z);
     var sorgente = $("#hb-template").html();
     var sorgDigerita = Handlebars.compile(sorgente);
+    // save the vote to be used on a function
+    var vote = z.vote_average;
     var objRef = {
       img: z.backdrop_path,
       title: z.title,
       titleOrg: z.original_title,
-      voto: z.vote_average
+      voto: stars(vote)
     };
+    
     var elValorizzato = sorgDigerita(objRef);
     $("#films").append(elValorizzato);
   });
 }
-
+function stars(vote){
+  var vote5 = Math.floor(vote / 2);
+  console.log(vote5);
+  var starFont = "";
+  for (let i = 0; i < vote5; i++) {
+    starFont += '<i class="fas fa-star"> </i>';
+  }
+  return starFont;
+  
+}
 $(document).ready(function() {
   // .toLowerCase().replace(/ /g,"+");
   $("#invia").click(function() {
