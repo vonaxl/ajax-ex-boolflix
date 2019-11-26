@@ -11,6 +11,9 @@ function callAjax(titolo) {
       console.log(dati.results);
       var movies = dati.results;
       print(movies);
+      if (movies.length>0){
+        inputReset();
+      }
 
       //   per ogni object dentro l'array dati.response pusha il template clonato dentro il container #albums
       // dati.results.forEach(z => {
@@ -26,8 +29,11 @@ function callAjax(titolo) {
     error: function() {}
   }); //fine $.ajax
 }
-
+function inputReset(){
+  $('#cerca').val('');
+}
 function print(movies) {
+  $("#cerca").html("");
   movies.forEach(z => {
     console.log(z);
     var sorgente = $("#hb-template").html();
@@ -45,9 +51,6 @@ function print(movies) {
 
 $(document).ready(function() {
   // .toLowerCase().replace(/ /g,"+");
-  $("#cerca").click(function() {
-    $("#cerca").html("");
-  });
   $("#invia").click(function() {
     var titolo = $("#cerca")
       .val()
