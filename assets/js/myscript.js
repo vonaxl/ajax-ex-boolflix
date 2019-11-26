@@ -63,7 +63,8 @@ function print(movies) {
       titleOrg: z.original_title,
       lingua: z.original_language,
       nazione: nation(flag),
-      voto: z.vote_average+' '+stars(vote)
+      voto: z.vote_average+' '+stars(vote),
+      trama: z.overview
     };
     
     var elValorizzato = sorgDigerita(objRef);
@@ -140,6 +141,14 @@ $(document).ready(function() {
     console.log(titolo);
     callMovie(titolo);
     callTv(titolo);
+  });
+  $(this).on('mouseenter', '.cardBody', function(){
+    $(this).find('.box').css('display', 'block')
+    console.log("enter");
+  });
+  $(this).on('mouseleave', '.cardBody', function(){
+    $(this).find('.box').css('display', 'none')
+    console.log("enter");
   });
 });
  
