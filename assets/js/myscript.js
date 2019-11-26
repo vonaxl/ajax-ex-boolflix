@@ -40,27 +40,55 @@ function print(movies) {
     var sorgDigerita = Handlebars.compile(sorgente);
     // save the vote to be used on a function
     var vote = z.vote_average;
+    var flag = z.original_language;
     var objRef = {
       img: z.backdrop_path,
       title: z.title,
       titleOrg: z.original_title,
-      voto: stars(vote)
+      lingua: z.original_language,
+      nazione: nation(flag),
+      voto: z.vote_average+' '+stars(vote)
     };
     
     var elValorizzato = sorgDigerita(objRef);
     $("#films").append(elValorizzato);
   });
 }
+
 function stars(vote){
   var vote5 = Math.floor(vote / 2);
+  var vuoto5= 5 - vote5 ;
   console.log(vote5);
   var starFont = "";
   for (let i = 0; i < vote5; i++) {
     starFont += '<i class="fas fa-star"> </i>';
   }
+  for (let j = 0; j < vuoto5; j++) {
+    starFont += '<i class="far fa-star"></i>';
+  }
   return starFont;
-  
 }
+
+function nation(flag){
+  var paese = "";
+  if (flag === "it") {
+    paese = 'it.png';
+  }else if (flag === "cn") {
+    paese = 'cn.png';
+  }else if (flag === "en") {
+    paese = 'uk.png';
+  }else if (flag === "jp") {
+    paese = 'jp.png';
+  }else if (flag === "fr") {
+    paese = 'fr.png';
+  }else if (flag === "hi") {
+    paese = 'hi.png';
+  }else {
+    paese = 'cn.png';
+  }
+  return paese
+}
+
 $(document).ready(function() {
   // .toLowerCase().replace(/ /g,"+");
   $("#invia").click(function() {
@@ -73,3 +101,4 @@ $(document).ready(function() {
     callAjax(titolo);
   });
 });
+ 
