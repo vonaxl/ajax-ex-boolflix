@@ -10,7 +10,7 @@ function callMovie(titolo) {
     success: function(dati) {
       console.log(dati.results);
       var movies = dati.results;
-      print(movies);
+      print('movie',movies);
       if (movies.length>0){
         inputReset();
       }
@@ -39,8 +39,8 @@ function callTv(titolo) {
       query: titolo
     },
     success: function(dati) {
-      var tv = dati.results;
-      printT(tv);
+      var movies = dati.results;
+      print('tv',movies);
     },
     error: function() {}
   }); //fine $.ajax
@@ -48,19 +48,29 @@ function callTv(titolo) {
 function inputReset(){
   $('#cerca').val('');
 }
-function print(movies) {
+function print(type, movies) {
   $("#cerca").html("");
   movies.forEach(z => {
     // console.log(z);
     var sorgente = $("#movies").html();
     var sorgDigerita = Handlebars.compile(sorgente);
     // save the vote to be used on a function
+    var title, orig_title, printOuput;
+    if (type =="movie") {
+      title = z.title;
+      orig_title = z.original_title;
+      printOuput = $("#films");
+    }else {
+      title = z.name;
+      orig_title= z.original_name;
+      printOuput = $("#tvSeries");
+    }
     var vote = z.vote_average;
     var flag = z.original_language;
     var objRef = {
       img: z.backdrop_path,
-      title: z.title,
-      titleOrg: z.original_title,
+      title: title,
+      titleOrg: orig_title,
       lingua: z.original_language,
       nazione: nation(flag),
       voto: z.vote_average+' '+stars(vote),
@@ -68,29 +78,7 @@ function print(movies) {
     };
     
     var elValorizzato = sorgDigerita(objRef);
-    $("#films").append(elValorizzato);
-  });
-}
-function printT(tv) {
-  $("#cerca").html("");
-  tv.forEach(z => {
-    // console.log(z);
-    var sorgente = $("#tvs").html();
-    var sorgDigerita = Handlebars.compile(sorgente);
-    // save the vote to be used on a function
-    var vote = z.vote_average;
-    var flag = z.original_language;
-    var objRef = {
-      img: z.backdrop_path,
-      title: z.name,
-      titleOrg: z.original_name,
-      lingua: z.original_language,
-      nazione: nation(flag),
-      voto: z.vote_average+' '+stars(vote)
-    };
-    
-    var elValorizzato = sorgDigerita(objRef);
-    $("#tvSeries").append(elValorizzato);
+    printOuput.append(elValorizzato);
   });
 }
 
@@ -99,12 +87,20 @@ function stars(vote){
   var vuoto5= 5 - vote5 ;
   console.log(vote5);
   var starFont = "";
-  for (let i = 0; i < vote5; i++) {
-    starFont += '<i class="fas fa-star"> </i>';
+  for (let i = 0; i < 5; i++) {
+  //   if (i <= vote5) {
+  //     starFont += '<i class="fas fa-star"> </i>';
+  //   }else{
+  //     starFont += '<i class="far fa-star"></i>';
+  //   }
+  // OPERATORE TERNARNIO
+    starFont += (i <= vote5) 
+      ? '<i class="fas fa-star"> </i>'
+      : '<i class="far fa-star"></i>';
   }
-  for (let j = 0; j < vuoto5; j++) {
-    starFont += '<i class="far fa-star"></i>';
-  }
+  // for (let j = 0; j < vuoto5; j++) {
+  //   starFont += '<i class="far fa-star"></i>';
+  // }
   return starFont;
 }
 
