@@ -98,30 +98,30 @@ function stars(vote){
       ? '<i class="fas fa-star"> </i>'
       : '<i class="far fa-star"></i>';
   }
-  // for (let j = 0; j < vuoto5; j++) {
-  //   starFont += '<i class="far fa-star"></i>';
-  // }
   return starFont;
 }
 
 function nation(flag){
-  var paese = "";
-  if (flag === "it") {
-    paese = 'it.png';
-  }else if (flag === "cn") {
-    paese = 'cn.png';
-  }else if (flag === "en") {
-    paese = 'uk.png';
-  }else if (flag === "ja") {
-    paese = 'jp.png';
-  }else if (flag === "fr") {
-    paese = 'fr.png';
-  }else if (flag === "hi") {
-    paese = 'hi.png';
-  }else {
-    paese = 'cn.png';
+  var paese = ['it','cn','en','ja','fr','hi'];
+  // if (flag === "it") {
+  //   paese = 'it.png';
+  // }else if (flag === "cn") {
+  //   paese = 'cn.png';
+  // }else if (flag === "en") {
+  //   paese = 'uk.png';
+  // }else if (flag === "ja") {
+  //   paese = 'jp.png';
+  // }else if (flag === "fr") {
+  //   paese = 'fr.png';
+  // }else if (flag === "hi") {
+  //   paese = 'hi.png';
+  // }else {
+  //   paese = 'cn.png';
+  // }
+  if (paese.includes(flag)){
+    return flag+'.png';
   }
-  return paese
+  return '';
 }
 
 $(document).ready(function() {
@@ -138,13 +138,13 @@ $(document).ready(function() {
     callMovie(titolo);
     callTv(titolo);
   });
-  $(this).on('mouseenter', '.cardBody', function(){
-    $(this).find('.box').css('display', 'block')
-    console.log("enter");
-  });
-  $(this).on('mouseleave', '.cardBody', function(){
-    $(this).find('.box').css('display', 'none')
-    console.log("enter");
-  });
+  // $(this).on('mouseenter', '.cardBody', function(){
+  //   $(this).find('.box').css('display', 'block')
+  //   console.log("enter");
+  // });
+  // $(this).on('mouseleave', '.cardBody', function(){
+  //   $(this).find('.box').css('display', 'none')
+  //   console.log("enter");
+  // });
 });
  
