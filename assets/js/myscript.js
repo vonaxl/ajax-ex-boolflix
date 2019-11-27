@@ -138,10 +138,16 @@ $(document).ready(function() {
     callMovie(titolo);
     callTv(titolo);
   });
-  // $(this).on('mouseenter', '.cardBody', function(){
-  //   $(this).find('.box').css('display', 'block')
-  //   console.log("enter");
-  // });
+  $(this).on('mouseenter mouseleave', '.cardBody', function(e){
+    var pict = $(this).css('background-image')
+    pict = pict.replace(/(?:^url\(["']?|["']?\)$)/g, "");
+    console.log(pict);
+    
+    var bg = e.type ==='mouseenter' ? pict : ' ';
+    
+    $('.wrapper').css('background-image','url('+bg+')');
+    
+  });
   // $(this).on('mouseleave', '.cardBody', function(){
   //   $(this).find('.box').css('display', 'none')
   //   console.log("enter");
